@@ -185,6 +185,7 @@ export function DashboardClientPage({ projects: initialProjects, contacts }: Das
                       <span className="text-sm">Κατάσταση</span>
                       <span className="text-sm font-medium">Σε προσφορά</span>
                     </div>
+                    {/* Progress for quotations is typically 0 */}
                     <Progress value={0} />
                   </CardContent>
                   <CardFooter className="flex justify-between items-center">
