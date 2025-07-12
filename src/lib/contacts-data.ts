@@ -1,4 +1,3 @@
-
 import type { Contact } from '@/types';
 
 // This is a mock data file. In a real application, you would fetch this from a database like Firestore.

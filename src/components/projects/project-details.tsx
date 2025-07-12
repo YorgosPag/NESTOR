@@ -1,4 +1,3 @@
-
 "use client";
 
 import type { Project, MasterIntervention, Contact, Stage, StageStatus } from "@/types";

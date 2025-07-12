@@ -1,4 +1,3 @@
-
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -45,7 +44,7 @@ export function CreateProjectForm({ contacts }: CreateProjectFormProps) {
     defaultValues: {
       title: "",
       ownerId: "",
-      budget: 0,
+      budget: undefined,
     },
   })
 

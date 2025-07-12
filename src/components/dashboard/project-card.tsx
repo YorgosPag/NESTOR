@@ -1,4 +1,3 @@
-
 "use client";
 
 import type { Project, Contact } from "@/types";

@@ -1,4 +1,3 @@
-
 // This is a mock data file. In a real application, you would fetch this from a database like Firestore.
 import type { Project, Contact, Intervention, Stage, StageStatus, FileAttachment, AuditLog } from '@/types';
 import { format, addDays, subDays } from 'date-fns';

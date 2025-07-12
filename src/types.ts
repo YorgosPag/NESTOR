@@ -1,4 +1,3 @@
-
 export type StageStatus = 'pending' | 'in progress' | 'completed' | 'failed';
 
 export type FileAttachment = {
@@ -22,7 +21,7 @@ export type Stage = {
   deadline: string; // YYYY-MM-DD
   status: StageStatus;
   assignee?: string; // Contact ID
-  assigneeContactId?: string; // Contact ID
+  assigneeContactId?: string;
   attachments: FileAttachment[];
   notes?: string;
   lastUpdated: string;

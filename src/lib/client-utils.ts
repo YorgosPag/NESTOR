@@ -1,4 +1,3 @@
-
 import type { Project } from '@/types';
 import { isPast, parseISO } from 'date-fns';
 
