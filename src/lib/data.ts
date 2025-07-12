@@ -1,17 +1,18 @@
+
 // This is a mock data file. In a real application, you would fetch this from a database like Firestore.
 import type { Project, Contact, Intervention, Stage, StageStatus, FileAttachment } from '@/types';
 import { format, addDays, subDays } from 'date-fns';
 
 const TODAY = new Date();
 
-const MOCK_CONTACTS: Contact[] = [
-    { id: 'contact_01', name: 'Ιωάννης Παπαδόπουλος', role: 'Owner', avatarUrl: 'https://placehold.co/100x100.png' },
-    { id: 'contact_02', name: 'Μαρία Γεωργίου', role: 'Owner', avatarUrl: 'https://placehold.co/100x100.png' },
-    { id: 'contact_03', name: 'Γιώργος Νικολάου', role: 'Technician', avatarUrl: 'https://placehold.co/100x100.png' },
-    { id: 'contact_04', name: 'Ελένη Δημητρίου', role: 'Supplier', avatarUrl: 'https://placehold.co/100x100.png' },
+let MOCK_CONTACTS: Contact[] = [
+    { id: 'contact_01', name: 'Ιωάννης Παπαδόπουλος', role: 'Owner', email: 'i.papadopoulos@example.com', phone: '2101234567', avatarUrl: 'https://placehold.co/100x100.png' },
+    { id: 'contact_02', name: 'Μαρία Γεωργίου', role: 'Owner', email: 'm.georgiou@example.com', phone: '2310987654', avatarUrl: 'https://placehold.co/100x100.png' },
+    { id: 'contact_03', name: 'Γιώργος Νικολάου', role: 'Technician', email: 'g.nikolaou@tech.com', phone: '6971234567', avatarUrl: 'https://placehold.co/100x100.png' },
+    { id: 'contact_04', name: 'Ελένη Δημητρίου', role: 'Supplier', email: 'info@dimitriou-supplies.gr', phone: '2107654321', avatarUrl: 'https://placehold.co/100x100.png' },
 ];
 
-const MOCK_PROJECTS: Project[] = [
+let MOCK_PROJECTS: Project[] = [
     {
         id: 'proj_01',
         title: 'Ανακαίνιση στο Μαρούσι',
@@ -92,7 +93,9 @@ export async function findContextByQuery(query: string): Promise<{ projectId: st
     // This is a very basic mock search. A real implementation would use a more robust search algorithm.
     const lowerQuery = query.toLowerCase();
     for (const project of MOCK_PROJECTS) {
+        if (!project.interventions) continue;
         for (const intervention of project.interventions) {
+            if(!intervention.stages) continue;
             for (const stage of intervention.stages) {
                 if (project.title.toLowerCase().includes(lowerQuery) || stage.title.toLowerCase().includes(lowerQuery)) {
                     return {
@@ -112,8 +115,9 @@ export async function findContextByQuery(query: string): Promise<{ projectId: st
 export async function updateStageStatus(projectId: string, stageId: string, status: StageStatus): Promise<boolean> {
     await delay(200);
     const project = MOCK_PROJECTS.find(p => p.id === projectId);
-    if (project) {
+    if (project && project.interventions) {
         for (const intervention of project.interventions) {
+            if (!intervention.stages) continue;
             const stage = intervention.stages.find(s => s.id === stageId);
             if (stage) {
                 stage.status = status;
@@ -129,10 +133,14 @@ export async function updateStageStatus(projectId: string, stageId: string, stat
 export async function addFileToStage(projectId: string, stageId: string, file: { name: string; url: string }): Promise<boolean> {
     await delay(400);
     const project = MOCK_PROJECTS.find(p => p.id === projectId);
-    if (project) {
+    if (project && project.interventions) {
         for (const intervention of project.interventions) {
+            if(!intervention.stages) continue;
             const stage = intervention.stages.find(s => s.id === stageId);
             if (stage) {
+                if (!stage.attachments) {
+                    stage.attachments = [];
+                }
                 const newAttachment: FileAttachment = {
                     id: `file_${Date.now()}`,
                     name: file.name,

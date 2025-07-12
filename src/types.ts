@@ -30,6 +30,8 @@ export type Contact = {
     id: string;
     name: string;
     role: string; // e.g., 'Owner', 'Technician', 'Supplier'
+    email: string;
+    phone: string;
     avatarUrl?: string;
 };
 
