@@ -1,9 +1,35 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { redirect } from 'next/navigation';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { Button } from "@/components/ui/button";
 import { BarChart, Briefcase, FileText, AlertTriangle } from "lucide-react";
 
+// This is a temporary, static dashboard page.
+// In a real application, you would fetch dynamic data here.
+// For example:
+// import { getProjects } from '@/lib/firebase/firestore';
+// const projects = await getProjects();
+
 export default function DashboardPage() {
+  const projects = [
+    { id: '1', name: 'Ανακαίνιση στο Μαρούσι', client: 'Ιωάννης Παπαδόπουλος', budget: 14200, progress: 75, status: 'On Track' },
+    { id: '2', name: 'Αναβάθμιση στην Πάτρα', client: 'Μαρία Γεωργίου', budget: 9500, progress: 25, status: 'Delayed' },
+  ];
+  const offers = [
+    { id: '3', name: 'Προσφορά για Νέα Κατοικία', client: 'Ιωάννης Παπαδόπουλος', budget: 25000, progress: 0, status: 'Quotation' }
+  ];
+  const upcomingDeadlines = [
+    { task: 'Παραγγελία Κουφωμάτων', dueIn: '5 ημέρες' },
+    { task: 'Εγκατάσταση Αντλίας', dueIn: '12 ημέρες' },
+  ];
+
+  const activeProjects = projects.filter(p => p.status === 'On Track' || p.status === 'Delayed');
+  const onTrackProjects = projects.filter(p => p.status === 'On Track');
+  const delayedProjects = projects.filter(p => p.status === 'Delayed');
+  const pendingOffers = offers.filter(o => o.status === 'Quotation');
+  
+  const totalBudget = activeProjects.reduce((sum, p) => sum + p.budget, 0);
+
   return (
     <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
       <div className="flex items-center justify-between">
@@ -23,8 +49,8 @@ export default function DashboardPage() {
             <CardTitle className="text-sm font-medium">Συνολικός Προϋπολογισμός (Ενεργά)</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold">€23,700</div>
-            <p className="text-xs text-muted-foreground">Σε 2 ενεργά έργα</p>
+            <div className="text-4xl font-bold">€{totalBudget.toLocaleString('el-GR')}</div>
+            <p className="text-xs text-muted-foreground">Σε {activeProjects.length} ενεργά έργα</p>
           </CardContent>
         </Card>
         <Card>
@@ -32,8 +58,8 @@ export default function DashboardPage() {
             <CardTitle className="text-sm font-medium">Έργα εντός Χρονοδιαγράμματος</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold">1</div>
-            <p className="text-xs text-muted-foreground">από σύνολο 2 ενεργών</p>
+            <div className="text-4xl font-bold">{onTrackProjects.length}</div>
+            <p className="text-xs text-muted-foreground">από σύνολο {activeProjects.length} ενεργών</p>
           </CardContent>
         </Card>
         <Card>
@@ -41,7 +67,7 @@ export default function DashboardPage() {
             <CardTitle className="text-sm font-medium">Έργα σε Καθυστέρηση</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold text-destructive">1</div>
+            <div className="text-4xl font-bold text-destructive">{delayedProjects.length}</div>
             <p className="text-xs text-muted-foreground">Απαιτούν προσοχή</p>
           </CardContent>
         </Card>
@@ -50,7 +76,7 @@ export default function DashboardPage() {
             <CardTitle className="text-sm font-medium">Προσφορές σε εκκρεμότητα</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="text-4xl font-bold">1</div>
+            <div className="text-4xl font-bold">{pendingOffers.length}</div>
             <p className="text-xs text-muted-foreground">Αναμένουν έγκριση</p>
           </CardContent>
         </Card>
@@ -65,6 +91,7 @@ export default function DashboardPage() {
           <CardContent>
             <div className="h-[300px] flex items-center justify-center bg-muted/50 rounded-md">
               <BarChart className="h-12 w-12 text-muted-foreground" />
+              <p className="ml-4 text-muted-foreground">Το γράφημα θα υλοποιηθεί σε επόμενο βήμα</p>
             </div>
           </CardContent>
         </Card>
@@ -74,20 +101,15 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-4">
-              <li className="flex items-start gap-3">
-                <AlertTriangle className="h-5 w-5 text-yellow-500 mt-1" />
-                <div>
-                  <p className="font-medium">Παραγγελία Κουφωμάτων</p>
-                  <p className="text-sm text-muted-foreground">σε 5 ημέρες</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-3">
-                <AlertTriangle className="h-5 w-5 text-yellow-500 mt-1" />
-                <div>
-                  <p className="font-medium">Εγκατάσταση Αντλίας</p>
-                  <p className="text-sm text-muted-foreground">σε 12 ημέρες</p>
-                </div>
-              </li>
+              {upcomingDeadlines.map((deadline, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <AlertTriangle className="h-5 w-5 text-yellow-500 mt-1" />
+                  <div>
+                    <p className="font-medium">{deadline.task}</p>
+                    <p className="text-sm text-muted-foreground">{deadline.dueIn}</p>
+                  </div>
+                </li>
+              ))}
             </ul>
           </CardContent>
         </Card>
@@ -98,63 +120,50 @@ export default function DashboardPage() {
         <div>
           <h2 className="text-2xl font-semibold tracking-tight">Πρόσφατα Ενεργά Έργα</h2>
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mt-4">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Ανακαίνιση στο Μαρούσι</CardTitle>
-                <CardDescription>Ιωάννης Παπαδόπουλος</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm">Πρόοδος</span>
-                  <span className="text-sm font-medium">75%</span>
-                </div>
-                <Progress value={75} />
-              </CardContent>
-              <CardFooter className="flex justify-between items-center">
-                <span className="text-lg font-bold">€14,200</span>
-                <Button variant="outline" size="sm">Προβολή</Button>
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-base">Αναβάθμιση στην Πάτρα</CardTitle>
-                <CardDescription>Μαρία Γεωργίου</CardDescription>
-              </CardHeader>
-              <CardContent>
-                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm">Πρόοδος</span>
-                  <span className="text-sm font-medium">25%</span>
-                </div>
-                <Progress value={25} />
-              </CardContent>
-              <CardFooter className="flex justify-between items-center">
-                <span className="text-lg font-bold">€9,500</span>
-                <Button variant="outline" size="sm">Προβολή</Button>
-              </CardFooter>
-            </Card>
+            {activeProjects.map(project => (
+              <Card key={project.id}>
+                <CardHeader>
+                  <CardTitle className="text-base">{project.name}</CardTitle>
+                  <CardDescription>{project.client}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-sm">Πρόοδος</span>
+                    <span className="text-sm font-medium">{project.progress}%</span>
+                  </div>
+                  <Progress value={project.progress} />
+                </CardContent>
+                <CardFooter className="flex justify-between items-center">
+                  <span className="text-lg font-bold">€{project.budget.toLocaleString('el-GR')}</span>
+                  <Button variant="outline" size="sm">Προβολή</Button>
+                </CardFooter>
+              </Card>
+            ))}
           </div>
         </div>
         
         <div>
            <h2 className="text-2xl font-semibold tracking-tight">Πρόσφατες Προσφορές</h2>
            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mt-4">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-base">Προσφορά για Νέα Κατοικία</CardTitle>
-                  <CardDescription>Ιωάννης Παπαδόπουλος</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm">Πρόοδος</span>
-                    <span className="text-sm font-medium">0%</span>
-                  </div>
-                  <Progress value={0} />
-                </CardContent>
-                <CardFooter className="flex justify-between items-center">
-                   <span className="text-lg font-bold">€25,000</span>
-                   <Button variant="outline" size="sm">Προβολή</Button>
-                </CardFooter>
-              </Card>
+              {pendingOffers.map(offer => (
+                <Card key={offer.id}>
+                  <CardHeader>
+                    <CardTitle className="text-base">{offer.name}</CardTitle>
+                    <CardDescription>{offer.client}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm">Κατάσταση</span>
+                      <span className="text-sm font-medium">Σε προσφορά</span>
+                    </div>
+                    <Progress value={0} />
+                  </CardContent>
+                  <CardFooter className="flex justify-between items-center">
+                     <span className="text-lg font-bold">€{offer.budget.toLocaleString('el-GR')}</span>
+                     <Button variant="outline" size="sm">Προβολή</Button>
+                  </CardFooter>
+                </Card>
+              ))}
            </div>
         </div>
       </section>
