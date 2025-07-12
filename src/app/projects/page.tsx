@@ -1,5 +1,5 @@
 
-import { ProjectsListClientPage } from "@/components/projects/projects-list-client-page";
+import { ProjectsListClientPage } from "./projects-client-page";
 import { getAllProjects } from "@/lib/data";
 import { getContacts } from "@/lib/contacts-data";
 
