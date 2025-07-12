@@ -22,6 +22,7 @@ export type Stage = {
   deadline: string; // YYYY-MM-DD
   status: StageStatus;
   assignee?: string; // Contact ID
+  assigneeContactId?: string; // Contact ID
   attachments: FileAttachment[];
   notes?: string;
   lastUpdated: string;
@@ -44,7 +45,7 @@ export type Contact = {
 };
 
 export type Project = {
-  id: string;
+  id:string;
   title: string;
   ownerId: string; // Contact ID
   status: 'Quotation' | 'On Track' | 'Delayed' | 'Completed';
@@ -53,4 +54,5 @@ export type Project = {
   createdAt: string; // YYYY-MM-DD
   alerts?: number;
   auditLog?: AuditLog[];
+  progress?: number;
 };

@@ -48,7 +48,7 @@ export function RecentActivity({ logs }: RecentActivityProps) {
               </div>
           ))}
           {logs.length === 0 && (
-            <p className="text-sm text-muted-foreground text-center">Δεν υπάρχει πρόσφατη δραστηριότητα.</p>
+            <p className="text-sm text-muted-foreground text-center py-8">Δεν υπάρχει πρόσφατη δραστηριότητα.</p>
           )}
         </div>
       </CardContent>
