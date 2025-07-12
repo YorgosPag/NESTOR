@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset } from '@/components/ui/sidebar';
-import { LayoutDashboard, List, FolderKanban, FileText, Construction, Users, Settings } from 'lucide-react';
+import { LayoutDashboard, List, FolderKanban, FileText, Construction, Users, Settings, Workflow, ListChecks, FilePieChart, Tags } from 'lucide-react';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -26,6 +26,8 @@ export default function RootLayout({
               <div className="flex items-center gap-2 p-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -34,12 +36,13 @@ export default function RootLayout({
                   strokeLinejoin="round"
                   className="h-6 w-6 text-primary"
                 >
-                  <path d="M20.25 10.5V6l-8.25-4.5-8.25 4.5v4.5l8.25 4.5 8.25-4.5z" />
-                  <path d="m12 15-8.25-4.5" />
-                  <path d="m12 15 8.25-4.5" />
-                  <path d="m12 21 8.25-4.5" />
-                  <path d="m3.75 16.5 8.25 4.5" />
-                  <path d="m12 6-8.25 4.5" />
+                  <path d="M12 2L3 7v10l9 5 9-5V7L12 2z" />
+                  <path d="M12 22V12" />
+                  <path d="M21 7l-9 5-9-5" />
+                  <path d="M3 7l9 5v10" />
+                  <path d="M21 7l-9 5v10" />
+                  <path d="M12 12l9-5" />
+                  <path d="M12 12L3 7" />
                 </svg>
                 <span className="text-lg font-semibold">NESTOR eco</span>
               </div>
@@ -67,19 +70,43 @@ export default function RootLayout({
                 <SidebarMenuItem>
                   <SidebarMenuButton href="#">
                     <FileText />
-                    Προσφορές
+                    Προσφορές Προμηθευτών
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton href="#">
                     <Construction />
-                    Παρεμβάσεις
+                    Κατάλογος Παρεμβάσεων
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton href="#">
+                    <Workflow />
+                    Λειτουργία Σταδίου
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
                   <SidebarMenuButton href="#">
                     <Users />
-                    Επαφές
+                    Λίστα Επαφών
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton href="#">
+                    <ListChecks />
+                    Προσαρμοσμένες Λίστες
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton href="#">
+                    <FilePieChart />
+                    Αναφορές
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                <SidebarMenuItem>
+                  <SidebarMenuButton href="#">
+                    <Tags />
+                    Ετικέτες
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
