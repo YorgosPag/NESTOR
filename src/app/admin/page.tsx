@@ -1,3 +1,4 @@
+
 import { getMasterInterventions } from "@/lib/interventions-data";
 import { AdminClientPage } from "@/components/admin/admin-client-page";
 
