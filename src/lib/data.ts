@@ -99,7 +99,8 @@ export async function getAllProjects(): Promise<Project[]> {
 
 export async function getProjectById(id: string): Promise<Project | undefined> {
     await delay(200);
-    return JSON.parse(JSON.stringify(MOCK_PROJECTS.find(p => p.id === id)));
+    const project = MOCK_PROJECTS.find(p => p.id === id);
+    return project ? JSON.parse(JSON.stringify(project)) : undefined;
 }
 
 export async function getAllContacts(): Promise<Contact[]> {
@@ -109,7 +110,8 @@ export async function getAllContacts(): Promise<Contact[]> {
 
 export async function getContactById(id: string): Promise<Contact | undefined> {
     await delay(100);
-    return JSON.parse(JSON.stringify(MOCK_CONTACTS.find(c => c.id === id)));
+    const contact = MOCK_CONTACTS.find(c => c.id === id);
+    return contact ? JSON.parse(JSON.stringify(contact)) : undefined;
 }
 
 export async function findContextByQuery(query: string): Promise<{ projectId: string; interventionMasterId: string; stageId: string, stageTitle: string, projectTitle: string } | null> {

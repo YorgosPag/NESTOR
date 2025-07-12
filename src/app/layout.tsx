@@ -70,7 +70,7 @@ export default function RootLayout({
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton href="#">
+                  <SidebarMenuButton href="/projects/proj_01">
                     <FolderKanban />
                     Προβολή Έργου
                   </SidebarMenuButton>
