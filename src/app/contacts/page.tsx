@@ -1,9 +1,9 @@
 
 import { getContacts } from "@/lib/contacts-data";
-import { ContactsTable } from "./contacts-table";
+import { ContactsTable } from "@/components/contacts/contacts-table";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
-import { CreateContactDialog } from "./create-contact-dialog";
+import { CreateContactDialog } from "@/components/contacts/create-contact-dialog";
 
 export default async function ContactsPage() {
     const contacts = await getContacts();
