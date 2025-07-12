@@ -70,7 +70,7 @@ export function ProjectCard({ project, contacts }: ProjectCardProps) {
             <span className="font-bold">€{project.budget.toLocaleString('el-GR')}</span>
         </div>
         <Button asChild variant="outline" size="sm">
-            <Link href={`/project/${project.id}`}>Προβολή</Link>
+            <Link href={`/projects/${project.id}`}>Προβολή</Link>
         </Button>
       </CardFooter>
     </Card>
