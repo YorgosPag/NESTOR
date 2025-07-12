@@ -8,7 +8,7 @@ export default function DashboardPage() {
         <h1 className="text-3xl font-bold tracking-tight">Πίνακας Ελέγχου</h1>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        <Card>
+        <Card className="shadow-md rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Στατιστικά</CardTitle>
             <BarChart className="h-4 w-4 text-muted-foreground" />
@@ -19,7 +19,7 @@ export default function DashboardPage() {
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="shadow-md rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Ειδοποιήσεις</CardTitle>
             <Bell className="h-4 w-4 text-muted-foreground" />
@@ -30,7 +30,7 @@ export default function DashboardPage() {
             </p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="shadow-md rounded-2xl">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Προσεχείς Εργασίες</CardTitle>
             <Briefcase className="h-4 w-4 text-muted-foreground" />

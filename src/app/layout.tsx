@@ -3,6 +3,9 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset } from '@/components/ui/sidebar';
 import { LayoutDashboard, List, FolderKanban, FileText, Construction, Users, Settings } from 'lucide-react';
+import { Inter } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'New App',
@@ -16,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className={inter.className}>
         <SidebarProvider>
           <Sidebar>
             <SidebarHeader>
@@ -32,8 +35,8 @@ export default function RootLayout({
                   className="h-6 w-6"
                 >
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <path d="M12 10c-2 0-4 1.5-4 4 0 2 2 3 4 3s4-1 4-3c0-2.5-2-4-4-4z"></path>
-                  <path d="M12 10c0-2.5 2-4 4-4"></path>
+                  <path d="M9 22V12h6v10"></path>
+                  <path d="m15 9-3 3-3-3"></path>
                 </svg>
                 <span className="text-lg font-semibold">NESTOR green</span>
               </div>
@@ -41,7 +44,7 @@ export default function RootLayout({
             <SidebarContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton href="/dashboard">
+                  <SidebarMenuButton href="/dashboard" isActive={true}>
                     <LayoutDashboard />
                     Πίνακας Ελέγχou
                   </SidebarMenuButton>
