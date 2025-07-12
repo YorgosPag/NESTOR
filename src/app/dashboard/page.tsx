@@ -30,11 +30,10 @@ export default async function DashboardPage() {
         .reduce((sum, p) => sum + p.budget, 0);
 
   const budgetByStatus = projects.reduce((acc, project) => {
-    const statusMap: Record<Project['status'], string> = {
+    const statusMap: Partial<Record<Project['status'], string>> = {
       'On Track': 'Εντός',
       'Delayed': 'Καθυστέρηση',
       'Completed': 'Ολοκληρωμένα',
-      'Quotation': 'Προσφορές'
     };
     const statusName = statusMap[project.status];
     if (statusName && project.status !== 'Quotation') {
@@ -97,7 +96,7 @@ export default async function DashboardPage() {
           <CardContent>
             <div className="text-2xl font-bold">{onTrackProjects}</div>
             <p className="text-xs text-muted-foreground">
-              από σύνολο {projects.filter(p => p.status !== 'Quotation').length}
+              από σύνολο {projects.filter(p => p.status === 'On Track' || p.status === 'Delayed').length} ενεργών
             </p>
           </CardContent>
         </Card>
