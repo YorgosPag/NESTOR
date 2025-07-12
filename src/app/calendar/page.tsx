@@ -1,6 +1,6 @@
 
 import { getAllProjects } from "@/lib/data";
-import { CalendarView } from "@/components/calendar/calendar-view";
+import { CalendarView } from "./calendar-view";
 import type { Project } from "@/types";
 
 export default async function CalendarPage() {

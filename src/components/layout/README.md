@@ -1,0 +1,1 @@
+This folder contains layout-related components like sidebar, header, etc.

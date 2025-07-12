@@ -1,0 +1,1 @@
+This folder contains shared components that can be used across different features.
