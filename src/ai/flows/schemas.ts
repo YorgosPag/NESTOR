@@ -1,46 +1,53 @@
-
 'use server';
 
 /**
- * @fileOverview Defines the Zod schemas for the inputs and outputs of the message processing AI flow.
+ * @fileOverview Defines the Zod schemas and TypeScript types for the message processor flow.
+ *
+ * - ProcessMessageInputSchema, ProcessMessageInput, FileInfo
+ * - ProcessMessageOutputSchema, ProcessMessageOutput
  */
-
 import { z } from 'zod';
 
-/**
- * Schema for the input of the message processing flow.
- */
 export const ProcessMessageInputSchema = z.object({
-  messageText: z.string().describe('The text message sent by the user.'),
+  messageText: z.string().describe("The text content of the user's message."),
   fileInfo: z
     .object({
-      name: z.string().describe('The name of the uploaded file.'),
       dataUri: z
         .string()
         .describe(
-          "The file content as a data URI. This must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+          "A file, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
         ),
+      name: z.string(),
+      mimeType: z.string(),
     })
     .optional()
-    .describe('An optional file attached by the user.'),
-  chatHistory: z.array(z.object({
-      role: z.enum(['user', 'model']),
-      content: z.string(),
-  })).optional().describe('The history of the conversation.'),
+    .describe('Information about any attached file.'),
 });
 export type ProcessMessageInput = z.infer<typeof ProcessMessageInputSchema>;
+export type FileInfo = z.infer<
+  typeof ProcessMessageInputSchema.shape.fileInfo
+>;
 
-
-/**
- * Schema for the output of the message processing flow.
- */
 export const ProcessMessageOutputSchema = z.object({
-    responseText: z.string().describe("A comprehensive, friendly response in Greek summarizing the actions taken or providing an answer. If an action failed, explain why."),
-    actionsTaken: z.array(z.object({
-        toolName: z.string().describe("The name of the tool that was executed (e.g., 'addFileToStage')."),
-        result: z.any().describe("The result or status of the tool execution."),
-    })).describe("A list of all actions performed by the AI tools during the process."),
-    tags: z.array(z.string()).optional().describe("A list of suggested tags in Greek based on the file content and message context (e.g., ['τιμολόγιο', 'τεχνική μελέτη', 'ΔΕΔΔΗΕ'])."),
-    forwardingRecommendation: z.string().optional().describe("A recommendation in Greek for which department or role the file should be forwarded to (e.g., 'Λογιστήριο', 'Τεχνικό Τμήμα').")
+  responseText: z
+    .string()
+    .describe(
+      'A confirmation message in Greek to send back to the user about the actions taken.'
+    ),
+  actionsTaken: z
+    .array(z.string())
+    .describe('A list of actions performed by the AI (tool names).'),
+  tags: z
+    .array(z.string())
+    .optional()
+    .describe(
+      'An array of suggested tags for the document, if a file was provided.'
+    ),
+  forwardingRecommendation: z
+    .string()
+    .optional()
+    .describe(
+      'A recommendation of which department/role the document should be forwarded to, in Greek.'
+    ),
 });
 export type ProcessMessageOutput = z.infer<typeof ProcessMessageOutputSchema>;
