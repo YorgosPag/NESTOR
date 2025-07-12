@@ -52,13 +52,13 @@ export default function RootLayout({
             <SidebarContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton href="/dashboard" isActive={true}>
+                  <SidebarMenuButton href="/dashboard">
                     <LayoutDashboard />
                     Πίνακας Ελέγχou
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
-                  <SidebarMenuButton href="#">
+                  <SidebarMenuButton href="/projects">
                     <List />
                     Λίστα Έργων
                   </SidebarMenuButton>
