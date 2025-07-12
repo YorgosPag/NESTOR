@@ -50,7 +50,7 @@ export default function RootLayout({
                     strokeWidth="16"
                   ></line>
                 </svg>
-                <span className="text-lg font-semibold">ProjectPlanner</span>
+                <span className="text-lg font-semibold">NESTOR green</span>
               </div>
             </SidebarHeader>
             <SidebarContent>
