@@ -1,7 +1,7 @@
 
+import { ProjectsListClientPage } from "@/components/projects/projects-list-client-page";
 import { getAllProjects } from "@/lib/data";
 import { getContacts } from "@/lib/contacts-data";
-import { ProjectsListClientPage } from "@/components/projects/projects-list-client-page";
 
 export default async function ProjectsPage() {
     const [projects, contacts] = await Promise.all([
