@@ -44,6 +44,8 @@ export function CreateProjectForm({ contacts }: CreateProjectFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: "",
+      ownerId: "",
+      budget: 0,
     },
   })
 
