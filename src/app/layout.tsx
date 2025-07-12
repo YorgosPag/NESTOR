@@ -56,7 +56,7 @@ export default function RootLayout({
             <SidebarContent>
               <SidebarMenu>
                 <SidebarMenuItem>
-                  <SidebarMenuButton href="#" isActive>
+                  <SidebarMenuButton href="/dashboard">
                     <LayoutDashboard />
                     Πίνακας Ελέγχου
                   </SidebarMenuButton>
