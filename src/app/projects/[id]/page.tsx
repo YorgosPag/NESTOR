@@ -19,17 +19,3 @@ export default async function ProjectPage({ params }: { params: { id: string } }
 
     return <ProjectDetails project={project} masterInterventions={masterInterventions} contacts={contacts} />;
 }
-
-export async function generateStaticParams() {
-  try {
-    const projects: Project[] = await getAllProjects();
-    // Filter out quotation projects as they might not have a full details page yet
-    const activeProjects = projects.filter(p => p.status !== 'Quotation');
-    return activeProjects.map((project) => ({
-      id: project.id,
-    }));
-  } catch (error) {
-    console.error("Failed to generate static params for projects:", error);
-    return [];
-  }
-}
