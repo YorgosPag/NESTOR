@@ -8,6 +8,14 @@ export type FileAttachment = {
   uploadedAt: string;
 };
 
+export type AuditLog = {
+    id: string;
+    user: string;
+    action: string;
+    timestamp: string;
+    details?: string;
+};
+
 export type Stage = {
   id: string;
   title: string;
@@ -43,4 +51,6 @@ export type Project = {
   budget: number;
   interventions: Intervention[];
   createdAt: string; // YYYY-MM-DD
+  alerts?: number;
+  auditLog?: AuditLog[];
 };

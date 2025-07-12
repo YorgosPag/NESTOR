@@ -1,6 +1,6 @@
 
 // This is a mock data file. In a real application, you would fetch this from a database like Firestore.
-import type { Project, Contact, Intervention, Stage, StageStatus, FileAttachment } from '@/types';
+import type { Project, Contact, Intervention, Stage, StageStatus, FileAttachment, AuditLog } from '@/types';
 import { format, addDays, subDays } from 'date-fns';
 
 const TODAY = new Date();
@@ -20,6 +20,11 @@ let MOCK_PROJECTS: Project[] = [
         status: 'On Track',
         budget: 14200,
         createdAt: format(subDays(TODAY, 45), 'yyyy-MM-dd'),
+        alerts: 2,
+        auditLog: [
+            { id: 'log_01', user: 'System', action: 'Stage "Επιμέτρηση" completed', timestamp: format(subDays(TODAY, 30), 'yyyy-MM-dd HH:mm:ss')},
+            { id: 'log_02', user: 'Admin', action: 'Status changed for stage "Παραγγελία & Παραλαβή" to in progress', timestamp: format(subDays(TODAY, 2), 'yyyy-MM-dd HH:mm:ss')},
+        ],
         interventions: [
             {
                 id: 'int_proj01_ins02',
@@ -41,6 +46,10 @@ let MOCK_PROJECTS: Project[] = [
         status: 'Delayed',
         budget: 9500,
         createdAt: format(subDays(TODAY, 60), 'yyyy-MM-dd'),
+        alerts: 1,
+        auditLog: [
+             { id: 'log_03', user: 'Admin', action: 'Note added to "Μελέτη & Διαστασιολόγηση"', timestamp: format(subDays(TODAY, 15), 'yyyy-MM-dd HH:mm:ss')},
+        ],
         interventions: [
             {
                 id: 'int_proj02_ins03',
@@ -55,12 +64,27 @@ let MOCK_PROJECTS: Project[] = [
         ]
     },
     {
+        id: 'proj_04',
+        title: 'Μόνωση ταράτσας στην Κηφισιά',
+        ownerId: 'contact_02',
+        status: 'Completed',
+        budget: 5800,
+        createdAt: format(subDays(TODAY, 120), 'yyyy-MM-dd'),
+        alerts: 0,
+        auditLog: [],
+        interventions: []
+    },
+    {
         id: 'proj_03',
         title: 'Προσφορά για Νέα Κατοικία',
         ownerId: 'contact_01',
         status: 'Quotation',
         budget: 25000,
         createdAt: format(subDays(TODAY, 10), 'yyyy-MM-dd'),
+        alerts: 0,
+        auditLog: [
+            { id: 'log_04', user: 'System', action: 'Project created as Quotation', timestamp: format(subDays(TODAY, 10), 'yyyy-MM-dd HH:mm:ss')},
+        ],
         interventions: []
     }
 ];
