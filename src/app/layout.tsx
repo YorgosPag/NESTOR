@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset } from '@/components/ui/sidebar';
-import { LayoutDashboard, List, FolderKanban, FileText, Construction, Users, Settings, Workflow, ListChecks, FilePieChart, Tags } from 'lucide-react';
+import { LayoutDashboard, List, FolderKanban, FileText, Construction, Users, Settings, Workflow, ListChecks, FilePieChart, Tags, Calendar } from 'lucide-react';
 import { Inter } from 'next/font/google';
 import { cn } from '@/lib/utils';
 
@@ -60,6 +60,12 @@ export default function RootLayout({
                   <SidebarMenuButton href="#">
                     <List />
                     Λίστα Έργων
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+                 <SidebarMenuItem>
+                  <SidebarMenuButton href="/calendar">
+                    <Calendar />
+                    Ημερολόγιο
                   </SidebarMenuButton>
                 </SidebarMenuItem>
                 <SidebarMenuItem>
