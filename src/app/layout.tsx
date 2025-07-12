@@ -4,8 +4,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { SidebarProvider, Sidebar, SidebarHeader, SidebarContent, SidebarMenu, SidebarMenuItem, SidebarMenuButton, SidebarInset } from '@/components/ui/sidebar';
 import { LayoutDashboard, List, FolderKanban, FileText, Construction, Users, Settings, Workflow, ListChecks, FilePieChart, Tags } from 'lucide-react';
 import { Inter } from 'next/font/google';
+import { cn } from '@/lib/utils';
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
 export const metadata: Metadata = {
   title: 'NESTOR eco',
@@ -19,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={cn('font-sans', inter.variable)}>
         <SidebarProvider>
           <Sidebar>
             <SidebarHeader>

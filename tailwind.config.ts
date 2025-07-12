@@ -19,8 +19,14 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        mono: ["var(--font-mono)", "monospace"],
+        sans: ["var(--font-sans)", "sans-serif"],
+      },
+      fontSize: {
+        h1: ['1.875rem', { lineHeight: '2.25rem', letterSpacing: '-0.025em', fontWeight: '700' }],
+        h2: ['1.5rem', { lineHeight: '2rem', letterSpacing: '-0.025em', fontWeight: '600' }],
+        h3: ['1.25rem', { lineHeight: '1.75rem', letterSpacing: '-0.025em', fontWeight: '600' }],
+        h4: ['1.125rem', { lineHeight: '1.75rem', fontWeight: '600' }],
+        p: ['0.875rem', { lineHeight: '1.5rem' }],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -63,15 +69,21 @@ const config = {
           '4': 'hsl(var(--chart-4))',
           '5': 'hsl(var(--chart-5))',
         },
+        sidebar: {
+          DEFAULT: 'hsl(var(--sidebar-background))',
+          foreground: 'hsl(var(--sidebar-foreground))',
+          primary: 'hsl(var(--sidebar-primary))',
+          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+          accent: 'hsl(var(--sidebar-accent))',
+          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+          border: 'hsl(var(--sidebar-border))',
+          ring: 'hsl(var(--sidebar-ring))',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
-        '2xl': '1.5rem',
-      },
-      boxShadow: {
-        'md': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
       },
       keyframes: {
         "accordion-down": {
