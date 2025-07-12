@@ -1,1 +1,6 @@
-// Flows will be imported for their side effects in this file.
+import { config } from 'dotenv';
+config();
+
+import '@/ai/flows/custom-style-text.ts';
+import '@/ai/flows/transform-text.ts';
+import '@/ai/flows/generate-creative-text.ts';
