@@ -103,6 +103,24 @@ export async function getProjectById(id: string): Promise<Project | undefined> {
     return project ? JSON.parse(JSON.stringify(project)) : undefined;
 }
 
+export async function createProject(projectData: { title: string; ownerId: string; budget: number }): Promise<Project> {
+    await delay(500);
+    const newProject: Project = {
+        id: `proj_${Date.now()}`,
+        ...projectData,
+        status: 'On Track', // Default status
+        createdAt: format(new Date(), 'yyyy-MM-dd'),
+        alerts: 0,
+        auditLog: [
+            { id: `log_${Date.now()}`, user: 'Admin', action: 'Project created', timestamp: format(new Date(), 'yyyy-MM-dd HH:mm:ss') }
+        ],
+        interventions: [],
+    };
+    MOCK_PROJECTS.unshift(newProject);
+    console.log("Created new project:", newProject);
+    return newProject;
+}
+
 export async function getAllContacts(): Promise<Contact[]> {
     await delay(100);
     return JSON.parse(JSON.stringify(MOCK_CONTACTS));
