@@ -1,3 +1,4 @@
+
 "use client";
 
 import type { Project, MasterIntervention, Contact, Stage, StageStatus } from "@/types";
@@ -12,7 +13,7 @@ import { format, parseISO } from 'date-fns';
 import { el } from 'date-fns/locale';
 import { AlertTriangle, CheckCircle, FileText, Loader, Info, PlusCircle, BotMessageSquare, Pencil } from 'lucide-react';
 import React from "react";
-import { generateReminder, type GenerateReminderOutput } from "@/ai/flows/generate-reminder-flow";
+// import { generateReminder, type GenerateReminderOutput } from "@/ai/flows/ai-smart-reminders";
 import { useToast } from "@/hooks/use-toast";
 
 const statusVariantMap: Record<Project['status'], "default" | "secondary" | "destructive"> = {
@@ -52,7 +53,7 @@ type StageCardProps = {
 
 function StageCard({ stage, contacts, project }: StageCardProps) {
   const [isLoading, setIsLoading] = React.useState(false);
-  const [reminder, setReminder] = React.useState<GenerateReminderOutput | null>(null);
+  // const [reminder, setReminder] = React.useState<GenerateReminderOutput | null>(null);
   const { toast } = useToast();
 
   const assignee = contacts.find(c => c.id === stage.assignee);
@@ -61,27 +62,32 @@ function StageCard({ stage, contacts, project }: StageCardProps) {
   
   const handleGenerateReminder = async () => {
     setIsLoading(true);
-    setReminder(null);
-    try {
-      const result = await generateReminder({
-        projectName: project.title,
-        stageName: stage.title,
-        deadline: stage.deadline,
-        status: stage.status,
-        lastUpdated: stage.lastUpdated,
-        notes: stage.notes
-      });
-      setReminder(result);
-    } catch (error) {
-      console.error("Failed to generate reminder:", error);
-      toast({
-        variant: "destructive",
-        title: "Σφάλμα",
-        description: "Δεν ήταν δυνατή η δημιουργία της υπενθύμισης."
-      });
-    } finally {
-      setIsLoading(false);
-    }
+    // setReminder(null);
+    toast({
+        title: "Coming Soon!",
+        description: "Η λειτουργία έξυπνης υπενθύμισης δεν είναι ακόμα διαθέσιμη."
+    });
+    setIsLoading(false);
+    // try {
+    //   const result = await generateReminder({
+    //     projectName: project.title,
+    //     stageName: stage.title,
+    //     deadline: stage.deadline,
+    //     status: stage.status,
+    //     lastUpdated: stage.lastUpdated,
+    //     notes: stage.notes
+    //   });
+    //   setReminder(result);
+    // } catch (error) {
+    //   console.error("Failed to generate reminder:", error);
+    //   toast({
+    //     variant: "destructive",
+    //     title: "Σφάλμα",
+    //     description: "Δεν ήταν δυνατή η δημιουργία της υπενθύμισης."
+    //   });
+    // } finally {
+    //   setIsLoading(false);
+    // }
   };
 
   return (
@@ -146,7 +152,7 @@ function StageCard({ stage, contacts, project }: StageCardProps) {
             </Button>
         </div>
 
-        {reminder && (
+        {/* {reminder && (
              <Alert variant={reminder.urgencyLevel === 'high' ? 'destructive' : 'default'}>
               <BotMessageSquare className="h-4 w-4" />
               <AlertTitle>{reminder.reminder}</AlertTitle>
@@ -160,7 +166,7 @@ function StageCard({ stage, contacts, project }: StageCardProps) {
                 </div>
               </AlertDescription>
             </Alert>
-        )}
+        )} */}
       </div>
     </div>
   );
