@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Bell, Briefcase, BarChart } from "lucide-react";
+import { Briefcase, FileText, Construction } from "lucide-react";
 
 export default function DashboardPage() {
   return (
@@ -10,34 +10,34 @@ export default function DashboardPage() {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Στατιστικά</CardTitle>
-            <BarChart className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <p className="text-xs text-muted-foreground">
-              Συνολικά έσοδα, ενεργά έργα και άλλα.
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Ειδοποιήσεις</CardTitle>
-            <Bell className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-             <p className="text-xs text-muted-foreground">
-              Σημαντικές ενημερώσεις και εκκρεμότητες.
-            </p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Προσεχείς Εργασίες</CardTitle>
+            <CardTitle className="text-sm font-medium">Έργα</CardTitle>
             <Briefcase className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <p className="text-xs text-muted-foreground">
-              Εργασίες που πρέπει να ολοκληρωθούν σύντομα.
+              Σύνολο ενεργών και ολοκληρωμένων έργων.
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Προσφορές</CardTitle>
+            <FileText className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+             <p className="text-xs text-muted-foreground">
+              Ενεργές και εκκρεμείς προσφορές.
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+            <CardTitle className="text-sm font-medium">Παρεμβάσεις</CardTitle>
+            <Construction className="h-4 w-4 text-muted-foreground" />
+          </CardHeader>
+          <CardContent>
+            <p className="text-xs text-muted-foreground">
+              Πλήθος προγραμματισμένων παρεμβάσεων.
             </p>
           </CardContent>
         </Card>
